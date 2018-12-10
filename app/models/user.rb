@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :favoriteposts, through: :favorites, source: :favoritepost
   
   #relationshipに倣ってとりあえず書く。
+  #pushし直すための意味のない変更を入れた行
   
   #has_many :reverses_of_favorites, class_name: 'Favorite', foreign_key: 'micropost_id'
   #has_many :favored, through: :reverses_of_favorites, source: :user
