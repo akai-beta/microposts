@@ -13,6 +13,16 @@ class User < ApplicationRecord
   has_many :reverses_of_relatiohship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relatiohship, source: :user
   
+  #  テーブルfavorites、お気に入りのマイクロポストはfavoritepostとした。
+  
+  has_many :favorites
+  has_many :favoriteposts, through: :favorites, source: :favoritepost
+  
+  #relationshipに倣ってとりあえず書く。
+  
+  #has_many :reverses_of_favorites, class_name: 'Favorite', foreign_key: 'micropost_id'
+  #has_many :favored, through: :reverses_of_favorites, source: :user
+  
   def follow(other_user)
     unless self == other_user
       self.relationships.find_or_create_by(follow_id: other_user.id)
@@ -25,10 +35,25 @@ class User < ApplicationRecord
   end
 
   def following?(other_user)
-    self.followings.include(other_user)
+    self.followings.include?(other_user)
   end
   
   def feed_microposts
     Micropost.where(user_id: self.following_ids + [self.id])
   end
+  
+  def like(micropost)
+    self.favorites.find_or_create_by(favoritepost_id: micropost.id)
+  end
+  
+  def unlike(micropost)
+    favorite = self.favorites.find_by(favoritepost_id: micropost.id)
+    favorite.destroy if favorite
+  end
+
+  def like?(micropost)
+    #binding.pry
+    self.favoriteposts.include?(micropost)
+  end
+
 end

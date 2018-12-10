@@ -40,11 +40,17 @@ class UsersController < ApplicationController
     @followers = @user.followers.page(params[:page])
     counts(@user)
   end
+  
+  def favoriteposts
+    @user = User.find(params[:id])
+    @favoriteposts = @user.favoriteposts.order('created_at DESC').page(params[:page])
+  end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+  
   
 end

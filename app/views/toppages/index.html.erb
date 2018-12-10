@@ -9,19 +9,6 @@
       <% end %>
     </aside>
     <div class="col-xs-8">
-      <!--
-      @userと@micropostsの中身を確認
-      <div>
-        <ul>
-          <li>
-            user: <%= @user %>/ id:<%= params[:id] %>
-          </li>
-          <li>
-            posts: <%= @microposts %>
-          </li>
-        </ul>
-      </div>
-      -->
       <%= render 'microposts/microposts', microposts: @microposts %> 
     </div>
   </div>

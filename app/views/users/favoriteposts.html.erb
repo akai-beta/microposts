@@ -1,0 +1,18 @@
+<h1><%= @user.name %>さんのお気に入りポスト</h1>
+<ul class="media-list">
+  <% @favoriteposts.each do |favoritepost| %>
+    <li class="media">
+      <div class="media-left">
+        <img class="media-object img-rounded" src="<%= gravatar_url(favoritepost.user, options = { size: 50 }) %>" alt="">
+      </div>
+      <div class="media-body">
+        <div>
+          <p><%= favoritepost.id %>：<%= favoritepost.content %></p>
+        </div>
+        <div>
+          <span class="text-muted">posted by <%= link_to favoritepost.user.name, user_path(favoritepost.user) %></span>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>
