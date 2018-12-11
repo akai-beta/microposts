@@ -9,7 +9,7 @@
       </div>
     </div>
     <div>
-        <%= link_to 'お気に入りリスト', likes_user_path(@current_user) %>
+        <%= link_to 'お気に入りリスト', likes_user_path(@user) %>
     </div>
     <%= render 'relationships/follow_button', user: @user %>
   </aside>
