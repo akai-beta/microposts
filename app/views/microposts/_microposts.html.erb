@@ -12,11 +12,11 @@
           <p><%= micropost.id %>：<%= micropost.content %></p>
         </div>
         <div>
-          <% if current_user == micropost.user %>
-            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-          <% end %>
-          <!-- パーシャルにしないでここに書いてみる -->
-          <% if current_user.like?(micropost) %>
+<% if current_user == micropost.user %>
+  <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+<% end %>
+<!-- パーシャルにしないでここに書いてみる -->
+<% if current_user.like?(micropost) %>
   <%= form_for(current_user.favorites.find_by(favoritepost_id: micropost.id), html: { method: :delete }) do |f| %>
     <%= hidden_field_tag :favoritepost_id, micropost.id %>
     <%= f.submit 'Unlike', class: 'btn btn-danger btn-xs' %>

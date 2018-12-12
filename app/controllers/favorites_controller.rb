@@ -15,6 +15,6 @@ class FavoritesController < ApplicationController
     micropost = Micropost.find(params[:favoritepost_id])
     current_user.unlike(micropost)
     flash[:danger] = 'お気に入りから削除しました'
-    redirect_to root_path
+    redirect_to :back
   end
 end

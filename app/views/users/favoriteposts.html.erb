@@ -8,6 +8,20 @@
       <div class="media-body">
         <div>
           <p><%= favoritepost.id %>：<%= favoritepost.content %></p>
+ 
+ <!--お気に入り一覧ページでも解除が出来ると良いと思います。 -->
+          <% if current_user.like?(favoritepost) %>
+  <%= form_for(current_user.favorites.find_by(favoritepost_id: favoritepost.id), html: { method: :delete }) do |f| %>
+    <%= hidden_field_tag :favoritepost_id, favoritepost.id %>
+    <%= f.submit 'Unlike', class: 'btn btn-danger btn-xs' %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.favorites.build) do |f| %>
+    <%= hidden_field_tag :favoritepost_id, favoritepost.id %>
+    <%= f.submit 'Like', class: 'btn btn-primary btn-xs' %>
+  <% end %>
+<% end %>
+
         </div>
         <div>
           <span class="text-muted">posted by <%= link_to favoritepost.user.name, user_path(favoritepost.user) %></span>
